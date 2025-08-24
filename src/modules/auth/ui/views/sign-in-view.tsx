@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { OctagonAlertIcon } from "lucide-react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import {FaGithub, FaGoogle} from 'react-icons/fa';
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -19,9 +20,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -29,9 +29,9 @@ const formSchema = z.object({
 });
 
 export const SignInView = () => {
-    const router= useRouter();
-    const [error, setError] = useState<string | null>(null);
-    const [pending, setPending] = useState(false);
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,25 +41,53 @@ export const SignInView = () => {
     },
   });
 
-  const onSubmit =  (data : z.infer<typeof formSchema>) => {
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
     setError(null);
     setPending(true);
 
-    authClient.signIn.email({
-        email: data.email,
-        password: data.password, 
-    }, {
-        onSuccess: () => {
-            router.push("/");
+    authClient.signIn
+      .email(
+        {
+          email: data.email,
+          password: data.password,
+          callbackURL: "/"
         },
-        onError: ({error}) => {
+        {
+          onSuccess: () => {
+            router.push("/");
+          },
+          onError: ({ error }) => {
             setError(error.message);
+          },
         }
-    })
-    .finally(() => {
+      )
+      .finally(() => {
         setPending(false);
-    });
-  }
+      });
+  };
+   const onSocial = (provider: "github" | "google") => {
+    setError(null);
+    setPending(true);
+
+    authClient.signIn
+      .social(
+        {
+          provider: provider,
+          callbackURL: "/"
+        },
+        {
+          onSuccess: () => {
+           
+          },
+          onError: ({ error }) => {
+            setError(error.message);
+          },
+        }
+      )
+      .finally(() => {
+        setPending(false);
+      });
+  };
 
   return (
     <div className="flex flex-col gap-6">
@@ -123,11 +151,23 @@ export const SignInView = () => {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <Button variant="outline" type="button" className="w-full">
-                    Google
+                  <Button
+                    disabled={pending}
+                    onClick={() => onSocial("google")}
+                    variant="outline"
+                    type="button"
+                    className="w-full"
+                  >
+                    <FaGoogle />
                   </Button>
-                  <Button variant="outline" type="button" className="w-full">
-                    Github
+                  <Button
+                    disabled={pending}
+                    onClick={() => onSocial("github")}
+                    variant="outline"
+                    type="button"
+                    className="w-full"
+                  >
+                    <FaGithub />
                   </Button>
                 </div>
                 <div className=" text-center text-sm">
