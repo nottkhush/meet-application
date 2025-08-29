@@ -1,7 +1,15 @@
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -53,22 +61,16 @@ export const DashboardUserButton = () => {
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>
-              {data.user.name}
-            </DrawerTitle>
-            <DrawerDescription>
-              {data.user.email}
-            </DrawerDescription>
+            <DrawerTitle>{data.user.name}</DrawerTitle>
+            <DrawerDescription>{data.user.email}</DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
             <Button variant="outline" onClick={() => {}}>
-              
-              <CreditCardIcon className="size-4 text-black"/>
+              <CreditCardIcon className="size-4 text-black" />
               Billing
             </Button>
             <Button variant="outline" onClick={onLogout}>
-              
-              <LogOutIcon className="size-4 text-black"/>
+              <LogOutIcon className="size-4 text-black" />
               Logout
             </Button>
           </DrawerFooter>

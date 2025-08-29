@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { OctagonAlertIcon } from "lucide-react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import {FaGithub, FaGoogle} from 'react-icons/fa';
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -50,7 +50,7 @@ export const SignInView = () => {
         {
           email: data.email,
           password: data.password,
-          callbackURL: "/"
+          callbackURL: "/",
         },
         {
           onSuccess: () => {
@@ -65,7 +65,7 @@ export const SignInView = () => {
         setPending(false);
       });
   };
-   const onSocial = (provider: "github" | "google") => {
+  const onSocial = (provider: "github" | "google") => {
     setError(null);
     setPending(true);
 
@@ -73,12 +73,10 @@ export const SignInView = () => {
       .social(
         {
           provider: provider,
-          callbackURL: "/"
+          callbackURL: "/",
         },
         {
-          onSuccess: () => {
-           
-          },
+          onSuccess: () => {},
           onError: ({ error }) => {
             setError(error.message);
           },

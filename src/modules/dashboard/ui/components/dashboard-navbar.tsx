@@ -12,17 +12,17 @@ export const DashboardNavbar = () => {
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-        if(e.key === "k" && (e.metaKey || e.ctrlKey)){
-            e.preventDefault();
-            setCommandOpen((open) => !open)
-        }
-    }
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setCommandOpen((open) => !open);
+      }
+    };
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, [])
+  }, []);
   return (
     <>
-        <DashboardCommand open={commandOpen} setOpen={setCommandOpen}/>
+      <DashboardCommand open={commandOpen} setOpen={setCommandOpen} />
       <nav className="flex px-4 gap-x-2 items-center py-3 border-b bg-background">
         <Button className="size-9" variant="outline" onClick={toggleSidebar}>
           {state === "collapsed" || isMobile ? (
@@ -35,7 +35,7 @@ export const DashboardNavbar = () => {
           className="h-9 w-[240px] justify-start font-normal text-muted-foreground hover:text-muted-foreground"
           variant="outline"
           size="sm"
-          onClick={() => setCommandOpen((open)=> !open)}
+          onClick={() => setCommandOpen((open) => !open)}
         >
           <SearchIcon />
           Search...

@@ -5,15 +5,15 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
-const SignUpPage = async() => {
+const SignUpPage = async () => {
   const session = await auth.api.getSession({
-      headers: await headers(),
-    });
-  
-    if (!!session) {
-      redirect("/");
-    }
-  return (<SignUpView />)
+    headers: await headers(),
+  });
+
+  if (!!session) {
+    redirect("/");
+  }
+  return <SignUpView />;
 };
 
 export default SignUpPage;
