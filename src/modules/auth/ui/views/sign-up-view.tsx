@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { OctagonAlertIcon } from "lucide-react";
 import Link from "next/link";
-import { authClient } from "@/lib/auth-client"; 
-import {FaGithub, FaGoogle} from 'react-icons/fa';
+import { authClient } from "@/lib/auth-client";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -64,7 +64,7 @@ export const SignUpView = () => {
           name: data.name,
           email: data.email,
           password: data.password,
-          callbackURL: "/"
+          callbackURL: "/",
         },
         {
           onSuccess: () => {
@@ -87,12 +87,10 @@ export const SignUpView = () => {
       .social(
         {
           provider: provider,
-          callbackURL: "/"
+          callbackURL: "/",
         },
         {
-          onSuccess: () => {
-           
-          },
+          onSuccess: () => {},
           onError: ({ error }) => {
             setError(error.message);
           },
