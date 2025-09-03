@@ -1,5 +1,4 @@
 import { auth } from "@/lib/auth";
-import { useAgentsFilters } from "@/modules/agents/hooks/use-agents-filters";
 import { loadSearchParams } from "@/modules/agents/params";
 import { AgentsListHeader } from "@/modules/agents/ui/components/agents-list-header";
 import {
