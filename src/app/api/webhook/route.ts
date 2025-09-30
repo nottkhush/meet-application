@@ -1,15 +1,18 @@
 import { and, eq, not } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
 import {
-  // CallEndedEvent,
-  // CallTranscriptionReadyEvent,
-  // CallRecordingReadyEvent,
+  CallEndedEvent,
+  CallTranscriptionReadyEvent,
   CallSessionParticipantLeftEvent,
+  CallRecordingReadyEvent,
   CallSessionStartedEvent,
 } from "@stream-io/node-sdk";
 import { db } from "@/db";
 import { agents, meetings } from "@/db/schema";
 import { StreamVideo } from "@/lib/stream-video";
+import { error } from "console";
+
 
 function verifySignatureWithSDK(body: string, signature: string): boolean {
   return StreamVideo.verifyWebhook(body, signature);
@@ -86,16 +89,15 @@ export async function POST(req: NextRequest) {
 
     const call = StreamVideo.video.call("default", meetingId);
 
+
     const realtimeClient = await StreamVideo.video.connectOpenAi({
       call,
-      openAiApiKey: process.env.OPENAI_API_KEY!,
+      openAiApiKey: process.env.GEMINI_API_KEY!,
       agentUserId: existingAgent.id,
     });
-    
     realtimeClient.updateSession({
       instructions: existingAgent.instruction,
     });
-
   } else if(eventType === "call.session_participant_left") {
         const event = payload as CallSessionParticipantLeftEvent;
         const meetingId = event.call_cid.split(":")[1];
@@ -105,7 +107,9 @@ export async function POST(req: NextRequest) {
         }
 
         const call = StreamVideo.video.call("default", meetingId);
+
         await call.end()
+
     }
 
   return NextResponse.json({ status: "ok" });
