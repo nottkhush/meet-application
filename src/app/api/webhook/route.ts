@@ -13,6 +13,7 @@ import { agents, meetings } from "@/db/schema";
 import { StreamVideo } from "@/lib/stream-video";
 import { error } from "console";
 
+
 function verifySignatureWithSDK(body: string, signature: string): boolean {
   return StreamVideo.verifyWebhook(body, signature);
 }
@@ -87,6 +88,8 @@ export async function POST(req: NextRequest) {
     }
 
     const call = StreamVideo.video.call("default", meetingId);
+
+
     const realtimeClient = await StreamVideo.video.connectOpenAi({
       call,
       openAiApiKey: process.env.GEMINI_API_KEY!,
@@ -104,7 +107,9 @@ export async function POST(req: NextRequest) {
         }
 
         const call = StreamVideo.video.call("default", meetingId);
-        await call.end();
+
+        await call.end()
+
     }
 
   return NextResponse.json({ status: "ok" });
