@@ -9,11 +9,8 @@ import {
   SidebarGroupContent,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSubButton,
-  SidebarProvider,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
