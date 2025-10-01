@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogIn, LogInIcon } from "lucide-react";
+import { LogInIcon } from "lucide-react";
 import {
   DefaultVideoPlaceholder,
   StreamVideoParticipant,
@@ -11,7 +11,9 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { generateAvatarUri } from "@/lib/avatar";
-import "@stream-io/video-react-sdk/dist/css/styles.css";
+import '@stream-io/video-react-sdk/dist/css/styles.css';
+
+
 
 const DisabledVideoPreview = () => {
   const { data } = authClient.useSession();

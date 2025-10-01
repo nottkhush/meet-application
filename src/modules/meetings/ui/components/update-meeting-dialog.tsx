@@ -13,7 +13,7 @@ export const UpdateMeetingDialog = ({open, onOpenChange, initialValues} : Update
     return (
         <ResponsiveDialog title="Edit Meeting" description="Edit the meeting details" open= {open} onOpenChange={onOpenChange}>
             <MeetingForm
-                onSuccess={(id) => onOpenChange(false)}
+                onSuccess={() => onOpenChange(false)}
                 onCancel={() => onOpenChange(false)}
                 initialValues={initialValues}
             />

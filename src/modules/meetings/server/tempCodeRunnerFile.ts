@@ -1,3 +1,12 @@
+import { db } from "@/db";
+import { agents, meetings } from "@/db/schema";
+import { generateAvatarUri } from "@/lib/avatar";
+import { TRPCError } from "@trpc/server";
+import { and, eq } from "drizzle-orm";
+import { meetingsInsertSchema } from "../schemas";
+import { protectedProcedure } from "@/trpc/init";
+import { StreamVideo } from "@/lib/stream-video";
+
 create: protectedProcedure
     .input(meetingsInsertSchema)
     .mutation(async ({ input, ctx }) => {
@@ -55,4 +64,4 @@ create: protectedProcedure
         },
       ]);
       return createdMeeting;
-    }),
+    });

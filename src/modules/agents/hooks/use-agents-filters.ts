@@ -1,5 +1,4 @@
 import { DEFAULT_PAGE } from "@/constants";
-import { Search } from "lucide-react";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
 
 export const useAgentsFilters = () =>{
