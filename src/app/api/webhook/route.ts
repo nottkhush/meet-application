@@ -98,7 +98,7 @@ export async function POST(req: NextRequest) {
 
     const realtimeClient = await StreamVideo.video.connectOpenAi({
       call,
-      openAiApiKey: process.env.GEMINI_API_KEY!,
+      openAiApiKey: process.env.OPENAI_API_KEY!,
       agentUserId: existingAgent.id,
     });
     realtimeClient.updateSession({
