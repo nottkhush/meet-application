@@ -14,7 +14,7 @@ import {
 
 import { useTRPC } from "@/trpc/client";
 import { LoadingState } from "@/components/loading-state";
-import "stream-chat-react";
+import "stream-chat-react/css/v2/index.css";
 
 interface ChatUIProps {
   meetingId: string;
