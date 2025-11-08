@@ -10,7 +10,8 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "dev:webhook": "ngrok http --url=nonrecurent-undejectedly-fernanda.ngrok-free.app 3000",
-    "dev:inngest": "npx inngest-cli@latest dev"
+    "dev:inngest": "npx inngest-cli@latest dev",
+    "start:all": "concurrently \"npm run dev\" \"npm run db:studio\" \"npm run dev:inngest\" \"npm run dev:webhook\""
   },
   "dependencies": {
     "@dicebear/collection": "^9.2.4",
@@ -101,6 +102,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-highlight-words": "^0.20.0",
+    "concurrently": "^9.2.1",
     "drizzle-kit": "^0.31.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
